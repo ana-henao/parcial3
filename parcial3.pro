@@ -15,6 +15,7 @@ SOURCES += \
     caniondefensivo.cpp \
     caniongraf.cpp \
     canionofensivo.cpp \
+    impactograf.cpp \
     main.cpp \
     mainwindow.cpp \
     movgraf.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     caniondefensivo.h \
     caniongraf.h \
     canionofensivo.h \
+    impactograf.h \
     mainwindow.h \
     movgraf.h \
     posicion.h

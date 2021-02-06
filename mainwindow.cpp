@@ -17,20 +17,22 @@ MainWindow::MainWindow(QWidget *parent)
     timer4=new QTimer(this);
     timer5=new QTimer(this);
 
+
     scene = new QGraphicsScene(this);
     scene->setSceneRect(-500,-200,1000,400);
 
     ui->campo->setScene(scene);
     ui->centralwidget->adjustSize();
 
-    this->canionD=new Caniongraf(30,1.2,new Posicion(150,0),true);
+    this->canionD=new Caniongraf(30,1.2,new Posicion(-100,0),true);
     this->canionD->setEscala(0.5);
 
-    this->canionO=new Caniongraf(30,1.2,new Posicion(-100,0),false);
+    this->canionO=new Caniongraf(30,1.2,new Posicion(150,0),false);
     this->canionO->setEscala(0.5);
 
     scene->addItem(this->canionD);
     scene->addItem(this->canionO);
+
 
     timer1->stop();
 //    timer2->stop();
@@ -71,11 +73,14 @@ bool MainWindow::impacto(Posicion *canionxy, Posicion *balaxy)
     cout<<"ycanion "<<canionxy->getY()<<endl;
     float d=calcularD();
     float r = pow(pow(balaxy->getX()-canionxy->getX(),2)+pow(balaxy->getY()-canionxy->getY(),2),0.5);
-    cout<<"xbala "<<balaxy->getX()<<endl;
-    cout<<"ybala "<<balaxy->getY()<<endl;
-    cout <<"d"<<d<<endl;
-    cout <<"r"<<r<<endl;
-    if(r<0.05*d){
+    if(!start){
+        cout<<"xbala "<<balaxy->getX()<<endl;
+        cout<<"ybala "<<balaxy->getY()<<endl;
+        cout <<"d"<<d<<endl;
+        cout <<"r"<<r<<endl;
+
+    }
+        if(r<=(0.05*d)){
         return true;
     }else{
         return false;
@@ -84,11 +89,11 @@ bool MainWindow::impacto(Posicion *canionxy, Posicion *balaxy)
 
 void MainWindow::generar_disparoO()
 {
-    if(anguloO<90){
+    if(anguloIO<90 and nCaso==1){
         cout<<"iniciar"<<endl;
         timer1->start(dt);
 
-
+        float d=calcularD();
         balaO=canionO->getCanionOfensivo()->Disparo(10);
         float xbala=balaO->getPosicion()->getX();
         float rcanion=canionO->getRadio();
@@ -96,15 +101,17 @@ void MainWindow::generar_disparoO()
         cout <<"actualizacionX"<<xbala-rcanion<<endl;
         cout <<"actualizacionT"<<ybala<<endl;
         balaO->Actualizar(xbala-rcanion,ybala);
+        impactoO=new impactograf(0.05*d,new Posicion(xbala-rcanion,ybala));
+        scene->addItem(impactoO);
         scene->addItem(balaO);
-        anguloO+=5;
+        anguloIO+=anguloInvO;
         cont=5000;
     }
 }
 
 void MainWindow::Caso1()
 {
-    balaO->getBala()->Movimiento(anguloO);
+    balaO->getBala()->Movimiento(anguloIO);
     //cout<<"caso1"<<endl;
     float xbala=balaO->getBala()->getPos()->getX();
     float rcanion=canionO->getRadio();
@@ -114,12 +121,15 @@ void MainWindow::Caso1()
     //cout << "balaoy "<<ybala<<endl;
     float newposx=xbala-rcanion+canionO->getCanionOfensivo()->getPosicion()->getX();
     float newposy=ybala+canionO->getCanionOfensivo()->getPosicion()->getY();
+    impactoO->Actualizar(newposx,newposy);
     balaO->Actualizar(newposx,newposy);
+
     if(cont%30==0){
         Movgraf *mov=new Movgraf(balaO->getBala()->getRadio()/7,new Posicion(newposx,newposy));
         scene->addItem(mov);
     }
-    bool imp=impacto(canionD->getCanionDefensivo()->getPosicion(),new Posicion(newposx,newposy));
+    bool imp=impacto(canionD->getCanionDefensivo()->getPosicion(),
+                     new Posicion(newposx,newposy));
     cout<<"imp "<<imp<<endl;
     if(imp){
 
@@ -136,6 +146,9 @@ void MainWindow::Caso1()
         }else{
             cont--;
         }
+    }
+    if(cont==0 and start==false){
+        timer1->stop();
     }
 }
 
@@ -159,16 +172,47 @@ void MainWindow::Caso5()
 
 }
 
-
 void MainWindow::on_iniciarCaso_clicked()
 {
     generar_disparoO();
+    if(start){
+        cont=0;
+        start=false;
+    }else{
+        cont=5000;
+        start=true;
+    }
+    int xO=ui->posxO->value();
+    int yO=ui->alturaO->value();
+    int xD=ui->posxD->value();
+    int yD=ui->alturaD->value();
+    anguloIO=ui->anguloIO->value();
+    anguloID=ui->anguloID->value();
+    anguloInvO=ui->intervaloO->value();
+    anguloInvD=ui->intervaloD->value();
+    velInO=ui->VelIO->value();
+    velInD=ui->VelId->value();
+
+    scene = new QGraphicsScene(this);
+    scene->setSceneRect(-500,-200,1000,400);
+
+    ui->campo->setScene(scene);
+    //ui->centralwidget->adjustSize();
+
+
+    this->canionD=new Caniongraf(30,velInD,new Posicion(xD,yD),true);
+    this->canionD->setEscala(0.5);
+
+    this->canionO=new Caniongraf(30,velInO,new Posicion(xO,yO),false);
+    this->canionO->setEscala(0.5);
+
+    scene->addItem(this->canionD);
+    scene->addItem(this->canionO);
 
 }
 
-void MainWindow::on_parar_clicked()
+void MainWindow::on_listaCasos_currentIndexChanged(int index)
 {
-
-    start=false;
+    nCaso=index;
 
 }

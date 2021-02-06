@@ -47,10 +47,13 @@
       <item row="3" column="4">
        <widget class="QSpinBox" name="intervaloD">
         <property name="minimum">
-         <number>90</number>
+         <number>0</number>
         </property>
         <property name="maximum">
-         <number>180</number>
+         <number>90</number>
+        </property>
+        <property name="value">
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -102,10 +105,18 @@
        </widget>
       </item>
       <item row="3" column="5">
-       <widget class="QDoubleSpinBox" name="VelId"/>
+       <widget class="QDoubleSpinBox" name="VelId">
+        <property name="value">
+         <double>1.200000000000000</double>
+        </property>
+       </widget>
       </item>
       <item row="2" column="5">
-       <widget class="QDoubleSpinBox" name="VelIO"/>
+       <widget class="QDoubleSpinBox" name="VelIO">
+        <property name="value">
+         <double>1.200000000000000</double>
+        </property>
+       </widget>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_4">
@@ -148,6 +159,9 @@
        <widget class="QSpinBox" name="intervaloO">
         <property name="maximum">
          <number>90</number>
+        </property>
+        <property name="value">
+         <number>5</number>
         </property>
        </widget>
       </item>

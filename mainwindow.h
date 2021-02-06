@@ -6,6 +6,7 @@
 #include "movgraf.h"
 #include "caniongraf.h"
 #include "QTimer"
+#include "impactograf.h"
 
 
 
@@ -35,8 +36,7 @@ public slots:
 
 private slots:
     void on_iniciarCaso_clicked();
-
-    void on_parar_clicked();
+    void on_listaCasos_currentIndexChanged(int index);
 
 private:
     QGraphicsScene scene_batalla;
@@ -52,9 +52,18 @@ private:
     Caniongraf *canionO;
     Balagraf *balaD;
     Balagraf *balaO;
-    bool start=true;
+    impactograf *impactoD;
+    impactograf *impactoO;
+    bool start=false;
     int cont=1000;
-    float anguloO=5;
+    float anguloIO=5;
+    float anguloID=5;
+    float anguloInvO=5;
+    float anguloInvD=5;
+    float velInO=0.5;
+    float velInD=0.5;
+    int nCaso=0;
+
 
 
     Ui::MainWindow *ui;
