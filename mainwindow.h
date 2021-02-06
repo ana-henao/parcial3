@@ -25,6 +25,8 @@ public:
     void mostrarinfo(Bala bala);
     bool impacto(Posicion *canionxy, Posicion *balaxy);
     void generar_disparoO();
+    Balagraf* cambioAngulo(float Vo, bool ataque);
+
 
 public slots:
     void Caso1();
@@ -58,12 +60,16 @@ private:
     int cont=1000;
     float anguloIO=5;
     float anguloID=5;
+    float angulo=0;
     float anguloInvO=5;
     float anguloInvD=5;
     float velInO=0.5;
     float velInD=0.5;
+    float velInvO=0.5;
+    float velInvD=0.5;
     int nCaso=0;
-
+    int nImpO=0;
+    int nImpD=0;
 
 
     Ui::MainWindow *ui;

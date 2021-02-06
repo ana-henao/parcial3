@@ -9,7 +9,7 @@ Balagraf::Balagraf(float R, Posicion *pos, float Vo)
     //cout<< "Xbalagraf" << pos->getX()<<endl;
     //cout<< "Ybalagraf" << pos->getY()<<endl;
     this->bala=new Bala(R,new Posicion(0,0),Vo);
-    setPos(pos->getX()*escala,pos->getY()*escala);
+    setPos(pos->getX(),pos->getY());
     this->pos=pos;
 
 
@@ -36,7 +36,7 @@ void Balagraf::Actualizar(float x, float y)
 
     //this->pos->setX(x);
     //this->pos->setY(y);
-    setPos(x*escala,y*escala);
+    setPos(x,y);
 
 }
 

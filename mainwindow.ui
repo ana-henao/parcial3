@@ -23,13 +23,6 @@
       <property name="bottomMargin">
        <number>5</number>
       </property>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Altura</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
@@ -44,16 +37,27 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="4">
-       <widget class="QSpinBox" name="intervaloD">
-        <property name="minimum">
-         <number>0</number>
+      <item row="3" column="5">
+       <widget class="QDoubleSpinBox" name="VelId">
+        <property name="value">
+         <double>1.200000000000000</double>
         </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Posición X</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="posxD">
         <property name="maximum">
-         <number>90</number>
+         <number>500</number>
         </property>
         <property name="value">
-         <number>5</number>
+         <number>150</number>
         </property>
        </widget>
       </item>
@@ -70,10 +74,91 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="3">
+       <widget class="QSpinBox" name="anguloID">
+        <property name="minimum">
+         <number>90</number>
+        </property>
+        <property name="maximum">
+         <number>180</number>
+        </property>
+        <property name="value">
+         <number>180</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Altura</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Posición Cañón defensivo </string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Velocida inicial</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="4">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Intervalo de Angulo</string>
+         <string>Cambio Angulo</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QSpinBox" name="anguloIO">
+        <property name="maximum">
+         <number>90</number>
+        </property>
+        <property name="value">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="4">
+       <widget class="QSpinBox" name="intervaloD">
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>90</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Angulo Inicial</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QSpinBox" name="intervaloO">
+        <property name="maximum">
+         <number>90</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3" colspan="2">
+       <widget class="QPushButton" name="iniciarCaso">
+        <property name="text">
+         <string>Iniciar Caso</string>
         </property>
        </widget>
       </item>
@@ -90,95 +175,10 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Angulo Inicial</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="5">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>Velocida inicial</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="5">
-       <widget class="QDoubleSpinBox" name="VelId">
-        <property name="value">
-         <double>1.200000000000000</double>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="5">
        <widget class="QDoubleSpinBox" name="VelIO">
         <property name="value">
          <double>1.200000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Posición Cañón defensivo </string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Posición X</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QSpinBox" name="anguloID">
-        <property name="minimum">
-         <number>90</number>
-        </property>
-        <property name="maximum">
-         <number>180</number>
-        </property>
-        <property name="value">
-         <number>100</number>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3">
-       <widget class="QSpinBox" name="anguloIO">
-        <property name="maximum">
-         <number>90</number>
-        </property>
-        <property name="value">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="4">
-       <widget class="QSpinBox" name="intervaloO">
-        <property name="maximum">
-         <number>90</number>
-        </property>
-        <property name="value">
-         <number>5</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QSpinBox" name="posxD">
-        <property name="maximum">
-         <number>500</number>
-        </property>
-        <property name="value">
-         <number>150</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3" colspan="2">
-       <widget class="QPushButton" name="iniciarCaso">
-        <property name="text">
-         <string>Iniciar Caso</string>
         </property>
        </widget>
       </item>
@@ -214,6 +214,27 @@
           <string>Caso5</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>Cambio Velocidad</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="6">
+       <widget class="QDoubleSpinBox" name="CambioVO">
+        <property name="value">
+         <double>0.010000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="6">
+       <widget class="QDoubleSpinBox" name="CambioVD">
+        <property name="value">
+         <double>0.010000000000000</double>
+        </property>
        </widget>
       </item>
      </layout>

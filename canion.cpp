@@ -12,8 +12,8 @@ Canion::Canion(float vo, Posicion* pos)
 
 Balagraf* Canion::Disparo(float R)
 {
-    cout<< "Xcanion" << this->pos->getX()<<endl;
-    cout<< "Ycanion" << this->pos->getY()<<endl;
+    //cout<< "Xcanion" << this->pos->getX()<<endl;
+    //cout<< "Ycanion" << this->pos->getY()<<endl;
     Balagraf *bala=new Balagraf(R,this->pos,this->vo);
     return bala;
 }
@@ -31,4 +31,14 @@ void Canion::setSegInfiltrado(float t)
 Posicion *Canion::getPosicion()
 {
     return this->pos;
+}
+
+void Canion::setVo(float Vo)
+{
+    this->vo=Vo;
+}
+
+float Canion::getVo()
+{
+    return this->vo;
 }

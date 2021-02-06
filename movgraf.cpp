@@ -5,7 +5,7 @@ Movgraf::Movgraf(float r, Posicion *pos)
 {
     this->radio=r;
     this->pos=pos;
-    setPos(this->pos->getX()*escala,this->pos->getY()*escala);
+    setPos(this->pos->getX(),this->pos->getY());
 }
 
 QRectF Movgraf::boundingRect() const

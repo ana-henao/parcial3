@@ -11,7 +11,7 @@ Caniongraf::Caniongraf(float r, float vo, Posicion* pos, bool def)
         this->of=new CanionOfensivo(vo,pos);
         this->def=NULL;
     }
-    setPos(pos->getX()*escala,pos->getY()*escala);
+    setPos(pos->getX(),pos->getY());
 
 }
 
@@ -49,7 +49,7 @@ CanionOfensivo *Caniongraf::getCanionOfensivo()
 
 Movgraf Caniongraf::Actualizar(float x, float y)
 {
-    setPos(x*escala,y*escala);
+    setPos(x,y);
 }
 
 void Caniongraf::setEscala(float e)

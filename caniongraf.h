@@ -17,7 +17,7 @@ private:
     CanionDefensivo *def;
     CanionOfensivo *of;
     float radio;
-    float escala=0.5;
+    float escala=0.8;
 
 public:
     Caniongraf(float r, float vo, Posicion* pos, bool def);

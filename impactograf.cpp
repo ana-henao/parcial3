@@ -5,7 +5,7 @@ impactograf::impactograf(float r, Posicion *pos)
 {
     this->R=r;
     this->pos=pos;
-    setPos(pos->getX()*escala,pos->getY()*escala);
+    setPos(pos->getX(),pos->getY());
 }
 
 QRectF impactograf::boundingRect() const
@@ -21,7 +21,7 @@ void impactograf::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 void impactograf::Actualizar(float x, float y)
 {
-     setPos(x*escala,y*escala);
+     setPos(x,y);
 }
 
 void impactograf::setEscala(float e)
