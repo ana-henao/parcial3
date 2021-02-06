@@ -11,7 +11,7 @@ Caniongraf::Caniongraf(float r, float vo, Posicion* pos, bool def)
         this->of=new CanionOfensivo(vo,pos);
         this->def=NULL;
     }
-    setPos(pos->getX(),pos->getY());
+    setPos(pos->getX()*escala,pos->getY()*escala);
 
 }
 
@@ -26,7 +26,7 @@ QRectF Caniongraf::boundingRect() const
         x=this->of->getPosicion()->getX();
         y=this->of->getPosicion()->getY();
     }
-    return QRectF(x,y,radio,radio);
+    return QRectF(x*escala,y*escala,radio,radio);
 }
 
 
@@ -49,12 +49,17 @@ CanionOfensivo *Caniongraf::getCanionOfensivo()
 
 Movgraf Caniongraf::Actualizar(float x, float y)
 {
-    setPos(x,y);
+    setPos(x*escala,y*escala);
 }
 
 void Caniongraf::setEscala(float e)
 {
     this->escala=e;
+}
+
+float Caniongraf::getRadio()
+{
+    return this->radio;
 }
 
 

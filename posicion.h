@@ -11,8 +11,8 @@ public:
     Posicion(float x, float y);
     float getX();
     float getY();
-    void setX(float y);
-    void setY(float x);
+    void setX(float x);
+    void setY(float y);
 };
 
 #endif // POSICION_H

@@ -10,7 +10,7 @@ class Movgraf: public QGraphicsItem
 {
 private:
     float radio;
-    float escala;
+    float escala=0.5;
     Posicion *pos;
 
 public:

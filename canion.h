@@ -16,6 +16,7 @@ public:
     bool infiltrado(float t);
     void setSegInfiltrado(float t);
     Posicion* getPosicion();
+
 };
 
 #endif // CANION_H

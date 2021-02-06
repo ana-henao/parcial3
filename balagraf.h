@@ -2,7 +2,6 @@
 #define BALAGRAF_H
 #include "bala.h"
 #include <QGraphicsItem>
-#include "movgraf.h"
 #include <QPainter>
 
 
@@ -10,16 +9,18 @@ class Balagraf: public QGraphicsItem
 {
 private:
     float R;
-    float escala;
+    float escala=0.5;
     Bala *bala;
+    Posicion *pos;
 
 public:
     Balagraf(float R, Posicion *pos, float Vo);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,QWidget *widget);
     Bala* getBala();
-    Movgraf Actualizar(float x, float y);
+    void Actualizar(float x, float y);
     void setEscala(float e);
+    Posicion* getPosicion();
 
 };
 

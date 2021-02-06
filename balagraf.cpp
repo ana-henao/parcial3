@@ -1,16 +1,23 @@
 #include "balagraf.h"
+#include "iostream"
+
+using namespace std;
 
 
 Balagraf::Balagraf(float R, Posicion *pos, float Vo)
 {
-    this->bala=new Bala(R,pos,Vo);
-    setPos(pos->getX(),pos->getY());
+    //cout<< "Xbalagraf" << pos->getX()<<endl;
+    //cout<< "Ybalagraf" << pos->getY()<<endl;
+    this->bala=new Bala(R,new Posicion(0,0),Vo);
+    setPos(pos->getX()*escala,pos->getY()*escala);
+    this->pos=pos;
+
 
 }
 
 void Balagraf::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::black);
+    painter->setBrush(Qt::red);
     painter->drawEllipse(boundingRect());
 }
 
@@ -24,13 +31,22 @@ Bala* Balagraf::getBala()
     return bala;
 }
 
-Movgraf Balagraf::Actualizar(float x, float y)
+void Balagraf::Actualizar(float x, float y)
 {
-    setPos(x,y);
+
+    //this->pos->setX(x);
+    //this->pos->setY(y);
+    setPos(x*escala,y*escala);
+
 }
 
 void Balagraf::setEscala(float e)
 {
     this->escala=e;
+}
+
+Posicion *Balagraf::getPosicion()
+{
+    return pos;
 }
 

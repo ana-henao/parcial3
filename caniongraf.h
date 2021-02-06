@@ -17,7 +17,7 @@ private:
     CanionDefensivo *def;
     CanionOfensivo *of;
     float radio;
-    float escala;
+    float escala=0.5;
 
 public:
     Caniongraf(float r, float vo, Posicion* pos, bool def);
@@ -27,6 +27,8 @@ public:
     CanionOfensivo* getCanionOfensivo();
     Movgraf Actualizar(float x, float y);
     void setEscala(float e);
+    float getRadio();
+
 };
 
 #endif // CANIONGRAF_H

@@ -5,6 +5,7 @@ Movgraf::Movgraf(float r, Posicion *pos)
 {
     this->radio=r;
     this->pos=pos;
+    setPos(this->pos->getX()*escala,this->pos->getY()*escala);
 }
 
 QRectF Movgraf::boundingRect() const
@@ -14,8 +15,11 @@ QRectF Movgraf::boundingRect() const
 
 void Movgraf::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::black);
+
+    painter->setBrush(Qt::darkCyan);
+    painter->setPen(Qt::NoPen);
     painter->drawEllipse(boundingRect());
+
 }
 
 QColor* Movgraf::getColorRandom()

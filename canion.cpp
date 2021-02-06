@@ -1,5 +1,8 @@
 #include "canion.h"
+#include "iostream"
 
+
+using namespace std;
 
 Canion::Canion(float vo, Posicion* pos)
 {
@@ -9,6 +12,8 @@ Canion::Canion(float vo, Posicion* pos)
 
 Balagraf* Canion::Disparo(float R)
 {
+    cout<< "Xcanion" << this->pos->getX()<<endl;
+    cout<< "Ycanion" << this->pos->getY()<<endl;
     Balagraf *bala=new Balagraf(R,this->pos,this->vo);
     return bala;
 }
