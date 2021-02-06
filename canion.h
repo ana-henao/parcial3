@@ -5,7 +5,7 @@
 
 class Canion
 {
-private:
+protected:
     Posicion *pos;
     float SegInf;
     float vo;

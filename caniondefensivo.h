@@ -1,6 +1,7 @@
 #ifndef CANIONDEFENSIVO_H
 #define CANIONDEFENSIVO_H
 #include "posicion.h"
+#include <QVector>
 #include "canion.h"
 
 class CanionDefensivo: public Canion
@@ -8,7 +9,7 @@ class CanionDefensivo: public Canion
 
 public:
     CanionDefensivo(float vo, Posicion* pos);;
-    void Predecir(float vo, float angulo);
+    QVector<float> Predecir( Posicion * posO);
 
 
 };

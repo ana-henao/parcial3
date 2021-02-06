@@ -25,7 +25,7 @@ public:
     void mostrarinfo(Bala bala);
     bool impacto(Posicion *canionxy, Posicion *balaxy);
     void generar_disparoO();
-    Balagraf* cambioAngulo(float Vo, bool ataque);
+    Balagraf* cambioAngulo(float Vo, bool ataque, Posicion * pos);
 
 
 public slots:
@@ -70,8 +70,9 @@ private:
     int nCaso=0;
     int nImpO=0;
     int nImpD=0;
-
-
+    float tO=0;
+    float tD=0    ;
+            QVector<float> datos;
     Ui::MainWindow *ui;
 
 };

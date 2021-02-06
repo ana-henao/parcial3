@@ -36,13 +36,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer1->stop();
     timer2->stop();
-//    timer3->stop();
+    timer3->stop();
 //    timer4->stop();
 //    timer5->stop();
 
     connect(timer1,SIGNAL(timeout()),this,SLOT(Caso1()));
     connect(timer2,SIGNAL(timeout()),this,SLOT(Caso2()));
-//    connect(timer3,SIGNAL(timeout()),this,SLOT(caso3()));
+    connect(timer3,SIGNAL(timeout()),this,SLOT(Caso3()));
 //    connect(timer4,SIGNAL(timeout()),this,SLOT(caso4()));
 //    connect(timer5,SIGNAL(timeout()),this,SLOT(caso5()));
 }
@@ -124,7 +124,7 @@ void MainWindow::generar_disparoO()
     }
 }
 
-Balagraf* MainWindow::cambioAngulo(float Vo, bool ataque)
+Balagraf* MainWindow::cambioAngulo(float Vo, bool ataque, Posicion * pos)
 {
     bool imp=false;
     Balagraf *bala_;
@@ -155,8 +155,8 @@ Balagraf* MainWindow::cambioAngulo(float Vo, bool ataque)
                          newposx=xbala-rcanion+canion_->getCanionOfensivo()->getPosicion()->getX();
                          newposy=ybala+canion_->getCanionOfensivo()->getPosicion()->getY();
 
-                         float xcanionD=canionD->getCanionDefensivo()->getPosicion()->getX();
-                         float ycanionD=canionD->getCanionDefensivo()->getPosicion()->getY();
+                         float xcanionD=pos->getX();
+                         float ycanionD=pos->getY();
                          imp=impacto(new Posicion(xcanionD,ycanionD),
                                           new Posicion(newposx,newposy));
 
@@ -187,7 +187,7 @@ Balagraf* MainWindow::cambioAngulo(float Vo, bool ataque)
                 cout<<"imp"<<nImpO<<endl;
                  ui->intervaloO->setValue(angulo);
                  ui->CambioVO->setValue(velInO);
-                 cambioAngulo(velInO,ataque);
+                 cambioAngulo(velInO,ataque,pos);
             }else{
 
                 cout<<"imp"<<nImpO<<endl;
@@ -223,8 +223,8 @@ Balagraf* MainWindow::cambioAngulo(float Vo, bool ataque)
                          //cout<<"xpos: "<<newposx<<endl;
                          newposy=ybala+canion_->getCanionDefensivo()->getPosicion()->getY();
 
-                         float xcanionO=canionO->getCanionOfensivo()->getPosicion()->getX()-canionO->getRadio();
-                         float ycanionO=canionO->getCanionOfensivo()->getPosicion()->getY();
+                         float xcanionO=pos->getX();
+                         float ycanionO=pos->getY();
                          imp=impacto(new Posicion(xcanionO,ycanionO),
                                           new Posicion(newposx,newposy));
 
@@ -256,7 +256,7 @@ Balagraf* MainWindow::cambioAngulo(float Vo, bool ataque)
                 //cout<<"vel"<<velInD<<endl;
                 // ui->intervaloD->setValue(angulo);
                 // ui->CambioVD->setValue(velInD);
-                 cambioAngulo(velInD,false);
+                 cambioAngulo(velInD,false,pos);
             }else{
 //                cout<<"c angulo: "<<angulo<<endl;
 //                cout<<"Vo canion: "<<canionD->getCanionDefensivo()->getVo()<<endl;
@@ -274,6 +274,8 @@ Balagraf* MainWindow::cambioAngulo(float Vo, bool ataque)
 
     return bala_;
 }
+
+
 
 void MainWindow::Caso1()
 {
@@ -303,7 +305,7 @@ void MainWindow::Caso1()
 
             timer1->stop();
             velInO+=velInvO;
-            cambioAngulo(velInO,true);
+            cambioAngulo(velInO,true, canionD->getCanionDefensivo()->getPosicion());
             cout<<"parar"<<endl;
     }else{
             cont--;
@@ -339,7 +341,7 @@ void MainWindow::Caso2()
 
             timer2->stop();
             velInD+=velInvD;
-            cambioAngulo(velInD,false);
+            cambioAngulo(velInD,false, canionO->getCanionOfensivo()->getPosicion());
             cout<<"parar"<<endl;
     }else{
             cont--;
@@ -347,7 +349,51 @@ void MainWindow::Caso2()
 }
 
 void MainWindow::Caso3()
-{
+{    
+
+    canionD->getCanionDefensivo()->setSegInfiltrado(2);
+
+    tO+=dt;
+
+    if( tO==2){
+        canionO->getCanionOfensivo()->setVo(datos[0]);
+        balaO=canionO->getCanionOfensivo()->Disparo(5);
+
+    }
+
+    if(tO>2){
+        balaO->getBala()->Movimiento(datos[1]);
+        //cout<<"caso1"<<endl;
+        float xbala=balaO->getBala()->getPos()->getX();
+        float rcanion=canionO->getRadio();
+        float ybala=-balaO->getBala()->getPos()->getY();
+        //cout << "balaox "<<xbala<<endl;
+
+        //cout << "balaoy "<<ybala<<endl;
+        float newposx=xbala-(rcanion)+canionO->getCanionOfensivo()->getPosicion()->getX();
+        float newposy=ybala+canionO->getCanionOfensivo()->getPosicion()->getY();
+        impactoO->Actualizar(newposx,newposy);
+        balaO->Actualizar(newposx,newposy);
+
+        if(cont%30==0){
+            Movgraf *mov=new Movgraf(balaO->getBala()->getRadio()/7,new Posicion(newposx,newposy));
+            scene->addItem(mov);
+        }
+
+        //cout<<"c angulo: "<<angulo<<endl;
+        //cout<<"Vo canion: "<<canionO->getCanionOfensivo()->getVo()<<endl;
+
+        if(cont==0){
+
+                timer3->stop();
+                //velInD+=velInvD;
+                //cambioAngulo(velInD,false, balaO->getPosicion());
+                cout<<"parar"<<endl;
+        }else{
+                cont--;
+        }
+
+    }
 
 }
 
@@ -401,10 +447,18 @@ void MainWindow::on_iniciarCaso_clicked()
     scene->addItem(this->canionO);
 
     if(nCaso==1){
-        cambioAngulo(velInO,true);
+        cambioAngulo(velInO,true, canionD->getCanionDefensivo()->getPosicion());
     }else if (nCaso==2){
-         cambioAngulo(velInD,false);
-    }
+         cambioAngulo(velInD,false, canionO->getCanionOfensivo()->getPosicion());
+    }else if (nCaso==3){
+
+
+           datos=canionD->getCanionDefensivo()->Predecir(canionO->getCanionOfensivo()->getPosicion());
+
+
+
+       timer3->start(dt);
+   }
 
 }
 
